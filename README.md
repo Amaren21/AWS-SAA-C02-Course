@@ -52,17 +52,21 @@ that make up the total service. There are parts that **you** manage as well
 as portions the **vendor** manages. The portions the vendor manages and you
 are charged for is the **unit of consumption**
 
-1. On-Premises: The individual manages all components from data to facilities.
+1. *On-Premises*: The individual manages all components from data to facilities.
 Provides the most flexibility, but also most IT intensive.
-2. Data Center Hosting: Place equipment in a building managed by a vendor.
+
+2. *Data Center Hosting*: Place equipment in a building managed by a vendor.
 You pay for the facilities only.
-3. Infrastructure as a Service (IaaS): Vendor manages facilities and everything
+
+3. *Infrastructure as a Service (IaaS)*: Vendor manages facilities and everything
 else related to servers up to the OS. You pay per second or minute for the OS
 used to the vendor. Lose some flexibility, but big risk reductions.
-4. Platform as a Service (PaaS): Good for running an application only. The
+
+4. *Platform as a Service (PaaS)*: Good for running an application only. The
 unit of consumption is the runtime environment. You manage the application
-and the data, but the vendor manges all else.
-5. Software as a Service (SaaS): You consume the software as a service. This
+and the data, but the vendor manages all else.
+
+5. *Software as a Service (SaaS)*: You consume the software as a service. This
 can be Outlook or Netflix. There are almost no risks or additional costs, but
 very little control.
 
@@ -82,20 +86,18 @@ There are additional services such as *Function as a Service*,
 
 ### 1.2.1. Public vs Private Services
 
-
-Refers to the networking only, not permissions.
+Refers to the *networking only*, not permissions.
 
 - Public Internet: AWS is a public cloud platform and connected to the public
 internet. It is not on the public internet, but is next to it.
+
 - AWS Public Zone: Attached to the Public Internet.
 S3 Bucket is hosted in the Public Zone, not all services are.
-Just because you connect to a public service,
-that does not mean you have permissions to access it.
-- AWS Private Zone: No direct connectivity is allowed between the AWS Private
-Zone and the public cloud unless this is configured for that service.
-This is done by taking a part of the private service and projecting it into the
-AWS public zone which allows public internet to make inbound or outbound
-connections.
+Just because you connect to a public service, that *does not mean you have permissions to access it*.
+
+- AWS Private Zone:
+**No direct connectivity is allowed between the AWS Private Zone and the public cloud unless this is configured for that service.**
+This is done by taking a part of the private service and *projecting it into the AWS public zone* which allows public internet to make inbound or outbound connections.
 
 ### 1.2.2. AWS Global Infrastructure
 
@@ -112,14 +114,15 @@ Areas such as countries or states
 - Beijing
 - London
 - Paris
+- South Africa
 
 AWS can only deploy regions as fast as their planning allows.
 Regions are often not near their customers.
 
 #### 1.2.2.2. AWS Edge Locations
 
-Local distribution points. Useful for services such as Netflix so they can store
-data closer to customers for low latency high speed transfers.
+*Local distribution points*. Useful for services such as Netflix so they can
+**store data closer to customers for low latency high speed transfers.**
 
 If a customer wants to access data stored in Brisbane, they will stream data
 from the Sydney Region through an Edge Location hosted in Brisbane.
@@ -132,18 +135,18 @@ Some services are global such as IAM
 
 #### 1.2.2.4. Region's 3 Benefits
 
-- Geographical Separation
+- *Geographical Separation*
   - Useful for natural disasters
   - Provide isolated fault domain
   - Regions are 100% isolated
-- Geopolitical Separation
+- *Geopolitical Separation*
   - Different laws change how things are accessed
   - Stability from political events
-- Location Control
+- *Location Control*
   - Tune architecture for performance
   - Duplicate infrastructure at closer points to customers
 
-### 1.2.3. Regions and AZs
+### 1.2.3. Regions and Availability Zones(AZ)
 
 Region Name: Asia Pacific (Sydney)
 Region Code: ap-southeast-2
@@ -154,12 +157,18 @@ Components are allowed to distribute load and resilience by using multiple zones
 
 AZs are connected to each other with high speed redundant networks.
 
+An Availability Zone (AZ) is one or more discrete data centers with redundant power, networking, and connectivity in an AWS Region. AZs give customers the ability to operate production applications and databases that are more highly available, fault tolerant, and scalable than would be possible from a single data center.
+
+AZs are physically separated by a meaningful distance, many kilometers, from any other AZ, although all are within 100 km (60 miles) of each other.
+
 #### 1.2.3.1. Service Resilience
 
-1. Globally Resilient: IAM or Route 53. No way for them to go down. Data is
+1. Globally Resilient: IAM or Route 53(DNS). No way for them to go down. Data is
 replicated throughout multiple regions.
+
 2. Region Resilient: Operate as separate services in each region. Generally
 replicate data to multiple AZs in that region.
+
 3. AZ Resilient: Run from a single AZ. It is possible for hardware to fail in an
 AZ and the service to keep running because of redundant equipment, but should
 not be relied on.
@@ -180,8 +189,8 @@ IP CIDR of a default VPC is always: **172.31.0.0/16**
 
 Configured to have one subnet in each AZ in the region by default.
 
-Subnets are given one section of the IP ranges for the default service. 
-They are configured to provide anything that is deployed inside those subnets with public IPv4 addresses. 
+Subnets are given one section of the IP ranges for the default service.
+They are configured to provide anything that is deployed inside those subnets with public IPv4 addresses.
 
 In general do not use the Default VPC in a region because it is not flexible.
 
@@ -390,6 +399,8 @@ A template can be updated and then used to update the same stack.
 
 ### 1.2.9. CloudWatch Basics
 
+Monitoring Service
+
 Collects and manages operational data on your behalf.
 
 Three products in one
@@ -572,7 +583,7 @@ Has relationships with all major registries (registrar)
   - Generally four of these for one individual zone
   - This is a hosted zone
   - The zone file will be put on these four managed nameservers
-- Route 53 will communicate with the `.org` registry and add the nameserver records 
+- Route 53 will communicate with the `.org` registry and add the nameserver records
 into the zone file for that top level domain.
   - This is done with a nameserver record (NS).
 
@@ -3673,7 +3684,7 @@ encryption, configuration, and networking without intervention.
 
 ### 1.10.7. Enhanced Monitoring
 
-CloudWatch gathers metrics about CPU utilization from the hypervisor for a DB instance, and Enhanced Monitoring gathers its metrics from an agent on the instance. As a result, you might find differences between the measurements, because the hypervisor layer performs a small amount of work. The differences can be greater if your DB instances use smaller instance classes, because then there are likely more virtual machines (VMs) that are managed by the hypervisor layer on a single physical instance. 
+CloudWatch gathers metrics about CPU utilization from the hypervisor for a DB instance, and Enhanced Monitoring gathers its metrics from an agent on the instance. As a result, you might find differences between the measurements, because the hypervisor layer performs a small amount of work. The differences can be greater if your DB instances use smaller instance classes, because then there are likely more virtual machines (VMs) that are managed by the hypervisor layer on a single physical instance.
 
 > Enhanced Monitoring metrics are useful when you want to see how different processes or threads on a DB instance use the CPU.
 
@@ -4524,7 +4535,7 @@ Public service that provides fully managed highly available message queues.
   puts it into a different workload to try and fix the corruption.
 - ASG can scale and lambdas can be invoked based on queue length.
 - Standard queue
-  - multi-lane highway. 
+  - multi-lane highway.
   - guarantee the order and at least once delivery.
 - FIFO queue
   - single lane road with no way to overtake
@@ -4533,9 +4544,9 @@ Public service that provides fully managed highly available message queues.
 
     Standard Queue| FIFO Queue |
     ---------|----------|---------
-    Multi lane highway | Single lane road with no way to overtake | 
-    guarantee the order and at least one delivery | guarantee the order and at exactly one delivery | 
-    empty| 3000 messages p/s with batching or up to 300 messages p/s without | 
+    Multi lane highway | Single lane road with no way to overtake |
+    guarantee the order and at least one delivery | guarantee the order and at exactly one delivery |
+    empty| 3000 messages p/s with batching or up to 300 messages p/s without |
 
 Billed on **requests** not messages. A request is a single request to SQS.
 One request can return 0 - 10 messages up to 64KB data in total.
@@ -4562,7 +4573,7 @@ policies only can allow access from an outside account. This is a resource polic
 
 - Scalable streaming service. It is designed to inject data from
 lots of devices or lots of applications.
-- Many producers send data into a Kinesis Stream. Streams are the basic unit of Kinesis. 
+- Many producers send data into a Kinesis Stream. Streams are the basic unit of Kinesis.
 - The stream can scale from low to near infinite data rates.
 - Highly available public service by design.
 - Streams store a 24-hour moving window of data.
@@ -4580,7 +4591,7 @@ that can be ingested during a 24 hour period. However much you ingest during
 **Kinesis data records (1MB)** are stored across shards and are the blocks
 of data for a stream.
 
-**Kinesis Data Firehose** connects to a Kinesis stream. It can move the data from a stream onto S3 or another service. Kinesis Firehose allows for the long term persistence of storage of kinesis data into services like S3. 
+**Kinesis Data Firehose** connects to a Kinesis stream. It can move the data from a stream onto S3 or another service. Kinesis Firehose allows for the long term persistence of storage of kinesis data into services like S3.
 
 ### 1.13.10. SQS vs Kinesis
 
@@ -4695,7 +4706,7 @@ permissions.
 
 - Move the AWS network closer to customers.
 - Designed to optimize the flow of data from users to your AWS infrastructure.
-- While CloudFront caches your application at Edge Locations, Global Accelerator moves the AWS infrastructure closer to your customers. 
+- While CloudFront caches your application at Edge Locations, Global Accelerator moves the AWS infrastructure closer to your customers.
 - Generally customers who are further away from your infrastructure go through
 more internet based hops and this means a lower quality connection.
 - Normal IP addresses are unicast IP addresses. These refer to one thing.
@@ -4831,7 +4842,7 @@ endpoint. You can either use the endpoint specific DNS names or you can
 enable PrivateDNS which overrides the default and allows unmodified
 applications to access the services using the interface endpoint. This doesn't
 use routing and only DNS.
-Interface endpoints because they use normal VPC network interfaces are **not highly available**. 
+Interface endpoints because they use normal VPC network interfaces are **not highly available**.
 > Make sure as a Solutions Architect when you are designing an architecture if you are utilizing multiple AZs then you need to put interface endpoints in every AZ that you use inside that VPC.
 
 ### 1.15.5. VPC Peering
@@ -4914,7 +4925,7 @@ Static| Dynamic |
   your hardware.
 - This is a single fiber optic cable from the AWS Managed DX port to your network.
 - You can run Virtual Interfaces (VIFs) over a single DX connect fiber optic line.
-- There is a one-to-many relationship between a DX line and VIFs. Therefore, you can multiple VIFs running on a single DX line. 
+- There is a one-to-many relationship between a DX line and VIFs. Therefore, you can multiple VIFs running on a single DX line.
 - VIFs are of two types:
   - Private VIF (VPC)
     - Connects to one AWS VPC
@@ -5398,7 +5409,7 @@ Answer: $N_i \cdot S_i$ = $10 \cdot 3 = 30$ WCUs
 
 Note: 1 RCU $=$ 4KB
 
-Example: What is the RCU of storing 10 items per second with 2.5K average size per item. 
+Example: What is the RCU of storing 10 items per second with 2.5K average size per item.
 
 $N_i = 10$
 $S_i = 1$ $\Rightarrow$ how many 2.5 ($\sim$3) can you get in 4, which is 1.
